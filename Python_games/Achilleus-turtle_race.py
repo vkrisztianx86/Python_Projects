@@ -1,5 +1,9 @@
 import os
 import time
+"""
+For the best experience, it should be run in terminal
+by typing python<path for the Achilleus-turtle_race>
+"""
 
 
 class Achilleus_runner:
