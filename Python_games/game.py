@@ -6,7 +6,7 @@ window = turtle.Screen()
 window.setup(width=800, height=600)
 window.bgcolor('brown')
 window.title('PONG')
-window.tracer(0)
+window.tracer(2)
 
 # Left hand side bat
 left_bat = turtle.Turtle()
@@ -28,33 +28,41 @@ right_bat.goto(350, 0)
 
 # Ball
 ball = turtle.Turtle()
-ball.speed(3)
+ball.speed(0)
 ball.shape('circle')
 ball.color('white')
 ball.penup()
 ball.goto(0, 0)
 ball.changesX = 1
-ball.changesY = 0
+ball.changesY = -1
 
 def left_bat_up():
     y = left_bat.ycor()
-    y += 30
+    y += 40
     left_bat.sety(y)
+    if y > 280:
+        left_bat.sety(280)
 
 def left_bat_down():
     y = left_bat.ycor()
-    y -= 30
+    y -= 40
     left_bat.sety(y)
+    if y < -280:
+        left_bat.sety(-280)
 
 def right_bat_up():
     y = right_bat.ycor()
-    y += 30
+    y += 40
     right_bat.sety(y)
+    if y > 280:
+        right_bat.sety(280)
 
 def right_bat_down():
     y = right_bat.ycor()
-    y -= 30
+    y -= 40
     right_bat.sety(y)
+    if y < -280:
+        right_bat.sety(-280)
 
 window.onkey(left_bat_up, 'w')
 window.onkey(left_bat_down, 's')
@@ -64,8 +72,10 @@ window.onkey(right_bat_down, 'k')
 
 window.listen()
 
+
 while True:
     #screen refresh
+    time.sleep(1 / 240)
     window.update()
     ball.setx(ball.xcor() + ball.changesX)
     ball.sety(ball.ycor() + ball.changesY)
@@ -79,6 +89,25 @@ while True:
     if ball.ycor() < -288:
         ball.sety(-288)
         ball.changesY *= -1
+
+    #touch right side
+    if ball.xcor() > 388:
+        ball.goto(0,0)
+        ball.changesX *= -1
+
+    if ball.xcor() < -388:
+        ball.goto(0,0)
+        ball.changesX *= -1
+
+    #bouncing from right bat
+    if right_bat.xcor() -20 < ball.xcor() < right_bat.xcor() and right_bat.ycor() - 40 < ball.ycor() < right_bat.ycor() + 40:
+        ball.setx(right_bat.xcor() - 20)
+        ball.changesX *= -1
+
+    # bouncing from left bat
+    if left_bat.xcor() + 20 > ball.xcor() > left_bat.xcor() and left_bat.ycor() - 40 < ball.ycor() < left_bat.ycor() + 40:
+        ball.setx(left_bat.xcor() + 20)
+        ball.changesX *= -1
 
 
 
