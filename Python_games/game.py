@@ -33,8 +33,8 @@ ball.shape('circle')
 ball.color('blue')
 ball.penup()
 ball.goto(0, 0)
-ball.changesX = 1
-ball.changesY = -1
+ball.changesX = 1.5
+ball.changesY = -1.5
 
 # SCORES
 right_score = 0
@@ -122,12 +122,12 @@ while True:
                     align='center', font=('Curier', 24, 'normal'))
 
     # bouncing from right bat
-    if right_bat.xcor() -20 < ball.xcor() < right_bat.xcor() and right_bat.ycor() - 40 < ball.ycor() < right_bat.ycor() + 40:
+    if right_bat.xcor() -20 < ball.xcor() < right_bat.xcor() and right_bat.ycor() - 55 < ball.ycor() < right_bat.ycor() + 50:
         ball.setx(right_bat.xcor() - 20)
         ball.changesX *= -1
 
     # bouncing from left bat
-    if left_bat.xcor() + 20 > ball.xcor() > left_bat.xcor() and left_bat.ycor() - 40 < ball.ycor() < left_bat.ycor() + 40:
+    if left_bat.xcor() + 20 > ball.xcor() > left_bat.xcor() and left_bat.ycor() - 55 < ball.ycor() < left_bat.ycor() + 50:
         ball.setx(left_bat.xcor() + 20)
         ball.changesX *= -1
 
